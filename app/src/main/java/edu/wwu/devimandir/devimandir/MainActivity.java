@@ -31,14 +31,9 @@ public class MainActivity extends AppCompatActivity {
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         hamburger = (Button) findViewById(R.id.hamburger);
 
-
-
         // Create array adapter to insert array of page names into side menu
         mAdapter = new ArrayAdapter<String>(this, R.layout.list_item_style, sideMenuPages);
-
         mDrawerList.setAdapter(mAdapter);
-
-
         hamburger.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
