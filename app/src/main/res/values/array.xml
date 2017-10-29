@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="side_menu_array">
+        <item>Book</item>
+        <item>Music</item>
+        <item>Videos</item>
+        <item>Panchang</item>
+        <item>LIVE Broadcasts</item>
+        <item>Photo Gallery</item>
+        <item>Quote for You</item>
+        <item>Social Media</item>
+        <item>More Apps</item>
+        <item>About Us</item>
+        <item>Help</item>
+    </string-array>
+</resources>
