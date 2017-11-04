@@ -4,6 +4,8 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Gravity;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -16,12 +18,19 @@ public class MainActivity extends AppCompatActivity {
     private ListView mDrawerList;
     private ArrayAdapter<String> mAdapter;
     private Button hamburger;
-
+    public static final String FRAGMENT_PDF_RENDERER_BASIC = "pdf_renderer_basic";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        if (savedInstanceState == null) {
+            getSupportFragmentManager().beginTransaction()
+                    .add(R.id.container, new PdfRendererBasicFragment(),
+                            FRAGMENT_PDF_RENDERER_BASIC)
+                    .commit();
+        }
 
         // Get array of side menu pages from array.xml
         sideMenuPages = getResources().getStringArray(R.array.side_menu_array);
@@ -31,7 +40,6 @@ public class MainActivity extends AppCompatActivity {
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         hamburger = (Button) findViewById(R.id.hamburger);
 
- // LOL HAMBURGERS! TEE HEE!
 
         // Create array adapter to insert array of page names into side menu
         mAdapter = new ArrayAdapter<String>(this, R.layout.list_item_style, sideMenuPages);
