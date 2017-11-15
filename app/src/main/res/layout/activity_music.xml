@@ -9,14 +9,14 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".MainActivity"
+        tools:context=".MusicActivity"
         android:background="#ffffffff">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
-            android:text="This will be Menu!"
+            android:text="This will be Music Page!"
             android:textSize="24sp"
             android:gravity="center"
             android:layout_marginTop="100dp"/>

@@ -2,19 +2,19 @@ package edu.wwu.devimandir.devimandir;
 
 import android.content.Intent;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Gravity;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 
-public class MainActivity extends AppCompatActivity {
+import static edu.wwu.devimandir.devimandir.R.id.hamburger;
 
+public class BookActivity extends MainActivity {
+
+    public static final String FRAGMENT_PDF_RENDERER_BASIC = "pdf_renderer_basic";
     private String[] sideMenuPages; // Array of strings containing names of side menu pages
     private DrawerLayout mDrawerLayout;
     private ListView mDrawerList;
@@ -24,7 +24,14 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_book);
+
+        if (savedInstanceState == null) {
+            getSupportFragmentManager().beginTransaction()
+                    .add(R.id.container, new PdfRendererBasicFragment(),
+                            FRAGMENT_PDF_RENDERER_BASIC)
+                    .commit();
+        }
 
         // Get array of side menu pages from array.xml
         sideMenuPages = getResources().getStringArray(R.array.side_menu_array);
@@ -51,21 +58,27 @@ public class MainActivity extends AppCompatActivity {
                 Intent intent;
                 switch(position) {
                     case 0:
-                        intent = new Intent(MainActivity.this, BookActivity.class);
+                        intent = new Intent(BookActivity.this, BookActivity.class);
                         startActivity(intent);
                         break;
                     case 1:
-                        intent = new Intent(MainActivity.this, MusicActivity.class);
+                        intent = new Intent(BookActivity.this, MusicActivity.class);
                         startActivity(intent);
                         break;
                 }
             }
         });
-
     }
-
 
     public void openDrawer(){
         mDrawerLayout.openDrawer(Gravity.LEFT);
     }
+
+    @Override
+    public void onBackPressed(){
+        Intent newIntent = new Intent(BookActivity.this, MainActivity.class);
+        startActivity(newIntent);
+        finish();
+    }
+
 }
