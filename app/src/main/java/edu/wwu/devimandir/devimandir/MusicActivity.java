@@ -47,11 +47,11 @@ public class MusicActivity extends AppCompatActivity {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                     switch(position) {
-                        case 0:
+                        case 1:
                             Intent intent = new Intent(MusicActivity.this, BookActivity.class);
                             startActivity(intent);
                             break;
-                        case 1:
+                        case 2:
                             intent = new Intent(MusicActivity.this, MusicActivity.class);
                             startActivity(intent);
                             break;

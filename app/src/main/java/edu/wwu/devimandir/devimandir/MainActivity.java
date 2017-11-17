@@ -50,11 +50,11 @@ public class MainActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent;
                 switch(position) {
-                    case 0:
+                    case 1:
                         intent = new Intent(MainActivity.this, BookActivity.class);
                         startActivity(intent);
                         break;
-                    case 1:
+                    case 2:
                         intent = new Intent(MainActivity.this, MusicActivity.class);
                         startActivity(intent);
                         break;
@@ -63,7 +63,10 @@ public class MainActivity extends AppCompatActivity {
         });
 
     }
-
+    @Override
+    public void onBackPressed(){
+        finish();
+    }
 
     public void openDrawer(){
         mDrawerLayout.openDrawer(Gravity.LEFT);

@@ -57,11 +57,11 @@ public class BookActivity extends MainActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent;
                 switch(position) {
-                    case 0:
+                    case 1:
                         intent = new Intent(BookActivity.this, BookActivity.class);
                         startActivity(intent);
                         break;
-                    case 1:
+                    case 2:
                         intent = new Intent(BookActivity.this, MusicActivity.class);
                         startActivity(intent);
                         break;
