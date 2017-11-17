@@ -23,15 +23,6 @@
         android:id="@+id/viewPage">
     </android.support.v4.view.ViewPager>
 
-    <TextView
-        android:layout_height="wrap_content"
-        android:layout_width="wrap_content"
-        android:layout_marginTop="100dp"
-        android:gravity="center"
-        android:textSize="24sp"
-        android:text="This is my test page!"
-        android:layout_centerHorizontal="true"/>
-
     <Button
         android:layout_height="wrap_content"
         android:layout_width="wrap_content"
@@ -58,7 +49,7 @@
         <TabHost
             android:layout_height="match_parent"
             android:layout_width="match_parent"
-            android:id="@+id/host">
+            android:id="@android:id/tabhost">
             <LinearLayout
                 android:layout_height="match_parent"
                 android:layout_width="match_parent"
@@ -74,27 +65,40 @@
                         android:id="@android:id/tabcontent">
 
                         <LinearLayout
+                            android:id="@+id/tab1"
                             android:layout_height="match_parent"
                             android:layout_width="match_parent"
-                            android:id="@+id/tab1"
-                            android:orientation="vertical"
-                            layout="@layout/activity_tab1">
+                            android:orientation="vertical">
+                            <TextView
+                                android:id="@+id/textView1"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="This is Tab 1!" />
+
                         </LinearLayout>
 
                         <LinearLayout
                             android:layout_height="match_parent"
                             android:layout_width="match_parent"
                             android:id="@+id/tab2"
-                            android:orientation="vertical"
-                            layout="@layout/activity_tab2">
+                            android:orientation="vertical">
+                            <TextView
+                                android:id="@+id/textView2"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="This is Tab 2!" />
                         </LinearLayout>
 
                         <LinearLayout
                             android:layout_height="match_parent"
                             android:layout_width="match_parent"
                             android:id="@+id/tab3"
-                            android:orientation="vertical"
-                            layout="@layout/activity_tab3">
+                            android:orientation="vertical">
+                            <TextView
+                                android:id="@+id/textView3"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="This is Tab 3!" />
                         </LinearLayout>
                     </FrameLayout>
                 </LinearLayout>

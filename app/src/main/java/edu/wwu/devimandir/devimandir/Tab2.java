@@ -2,6 +2,7 @@ package edu.wwu.devimandir.devimandir;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 
 public class Tab2 extends Activity {
 
