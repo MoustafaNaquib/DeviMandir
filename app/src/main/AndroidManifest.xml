@@ -21,7 +21,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
+        <activity android:name=".Tab1"/>
+        <activity android:name=".Tab2"/>
+        <activity android:name=".Tab3"/>
         <activity
             android:name=".BookActivity"
             android:parentActivityName=".MainActivity"></activity>

@@ -1,6 +1,7 @@
 package edu.wwu.devimandir.devimandir;
 
 import android.content.Intent;
+import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -12,6 +13,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.TabHost;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -20,11 +22,34 @@ public class MainActivity extends AppCompatActivity {
     private ListView mDrawerList;
     private ArrayAdapter<String> mAdapter;
     private Button hamburger;
+    private ViewPager viewPage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        TabHost tab = (TabHost) findViewById(R.id.host);
+        tab.setup();
+
+        TabHost.TabSpec spec1 = tab.newTabSpec("TAB 1");
+        spec1.setIndicator("TAB 1");
+        spec1.setContent(R.id.tab1);
+        tab.addTab(spec1);
+
+        TabHost.TabSpec spec2 = tab.newTabSpec("TAB 2");
+        spec2.setIndicator("TAB 2");
+        spec2.setContent(R.id.tab2);
+        tab.addTab(spec2);
+
+        TabHost.TabSpec spec3 = tab.newTabSpec("TAB 3");
+        spec3.setIndicator("TAB 3");
+        spec3.setContent(R.id.tab3);
+        tab.addTab(spec3);
+
+        viewPage = (ViewPager) findViewById(R.id.viewPage);
+        ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(this);
+        viewPage.setAdapter(viewPagerAdapter);
 
         // Get array of side menu pages from array.xml
         sideMenuPages = getResources().getStringArray(R.array.side_menu_array);
