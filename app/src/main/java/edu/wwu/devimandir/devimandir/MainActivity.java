@@ -6,8 +6,6 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Gravity;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -62,18 +60,19 @@ public class MainActivity extends AppCompatActivity {
         // Get view by id for needed elements
         mDrawerList = (ListView) findViewById(R.id.navList);
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-        hamburger = (Button) findViewById(R.id.hamburger);
+//        hamburger = (Button) findViewById(R.id.hamburger);
 
 
         // Create array adapter to insert array of page names into side menu
         mAdapter = new ArrayAdapter<String>(this, R.layout.list_item_style, sideMenuPages);
         mDrawerList.setAdapter(mAdapter);
-        hamburger.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                openDrawer();
-            }
-        });
+
+//        hamburger.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                openDrawer();
+//            }
+//        });
 
         mDrawerList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override

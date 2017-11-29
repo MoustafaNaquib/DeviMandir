@@ -23,9 +23,13 @@ import android.graphics.pdf.PdfRenderer;
 import android.os.Bundle;
 import android.os.ParcelFileDescriptor;
 import android.support.v4.app.Fragment;
+import android.util.Log;
+import android.view.ContextMenu;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -34,6 +38,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
 
 /**
  * This fragment has a big {@ImageView} that shows PDF pages, and 2
@@ -83,10 +88,14 @@ public class PdfRendererBasicFragment extends Fragment implements View.OnClickLi
      */
     private Button mButtonNext;
 
+    private Button mSavePage;
+
     /**
      * PDF page index
      */
     private int mPageIndex;
+
+    private ArrayList<Integer> bookmarkList = new ArrayList<>();
 
     public PdfRendererBasicFragment() {
     }
@@ -104,15 +113,27 @@ public class PdfRendererBasicFragment extends Fragment implements View.OnClickLi
         mImageView = (ImageView) view.findViewById(R.id.image);
         mButtonPrevious = (Button) view.findViewById(R.id.previous);
         mButtonNext = (Button) view.findViewById(R.id.next);
+        mSavePage = (Button) view.findViewById(R.id.savePage);
         // Bind events.
         mButtonPrevious.setOnClickListener(this);
         mButtonNext.setOnClickListener(this);
+        mSavePage.setOnClickListener(this);
 
         mPageIndex = 0;
         // If there is a savedInstanceState (screen orientations, etc.), we restore the page index.
         if (null != savedInstanceState) {
             mPageIndex = savedInstanceState.getInt(STATE_CURRENT_PAGE_INDEX, 0);
         }
+
+        Button bookmarkButton = (Button) getActivity().findViewById(R.id.hamburger);
+
+        registerForContextMenu(bookmarkButton);
+        bookmarkButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getActivity().openContextMenu(v);
+            }
+        });
     }
 
     @Override
@@ -232,6 +253,10 @@ public class PdfRendererBasicFragment extends Fragment implements View.OnClickLi
         return mPdfRenderer.getPageCount();
     }
 
+    public int getCurrentPage() {
+        return mCurrentPage.getIndex();
+    }
+
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
@@ -245,7 +270,35 @@ public class PdfRendererBasicFragment extends Fragment implements View.OnClickLi
                 showPage(mCurrentPage.getIndex() + 1);
                 break;
             }
+            case R.id.savePage: {
+                if (!bookmarkList.contains(mCurrentPage.getIndex())) {
+                    bookmarkList.add(mCurrentPage.getIndex());
+                }
+                break;
+            }
         }
     }
+
+    @Override
+    public boolean onContextItemSelected(MenuItem item) {
+
+        AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
+
+        showPage(item.getItemId());
+
+
+        return true;
+    }
+
+    @Override
+    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+        super.onCreateContextMenu(menu, v, menuInfo);
+        for (int i = 0; i < bookmarkList.size(); i++) {
+            String line = "Page " + (bookmarkList.get(i)+1);
+            menu.add(0,bookmarkList.get(i),bookmarkList.get(i), line);
+        }
+        getActivity().getMenuInflater().inflate(R.menu.bookmarks , menu);
+    }
+
 
 }
