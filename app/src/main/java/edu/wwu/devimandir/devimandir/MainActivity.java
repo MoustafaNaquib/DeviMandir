@@ -97,7 +97,7 @@ public class MainActivity extends AppCompatActivity {
         finish();
     }
 
-    public void openDrawer(){
-        mDrawerLayout.openDrawer(Gravity.LEFT);
-    }
+//    public void openDrawer(){
+//        mDrawerLayout.openDrawer(Gravity.LEFT);
+//    }
 }

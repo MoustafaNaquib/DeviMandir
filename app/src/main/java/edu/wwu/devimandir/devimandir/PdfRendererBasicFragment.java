@@ -1,21 +1,4 @@
-/*
- * Copyright (C) 2014 The Android Open Source Project
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-
 package edu.wwu.devimandir.devimandir;
-
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -23,17 +6,16 @@ import android.graphics.pdf.PdfRenderer;
 import android.os.Bundle;
 import android.os.ParcelFileDescriptor;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.ContextMenu;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
-
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -41,59 +23,29 @@ import java.io.InputStream;
 import java.util.ArrayList;
 
 /**
- * This fragment has a big {@ImageView} that shows PDF pages, and 2
- * {@link android.widget.Button}s to move between pages. We use a
- * {@link android.graphics.pdf.PdfRenderer} to render PDF pages as
- * {@link android.graphics.Bitmap}s.
+ * Fragment that displays pdf as image view with buttons for pages and bookmarking system in place
  */
+
 public class PdfRendererBasicFragment extends Fragment implements View.OnClickListener {
 
-    /**
-     * Key string for saving the state of current page index.
-     */
-    private static final String STATE_CURRENT_PAGE_INDEX = "current_page_index";
+    private static final String STATE_CURRENT_PAGE_INDEX = "current_page_index"; // current state
 
-    /**
-     * The filename of the PDF.
-     */
-    private static final String FILENAME = "sample.pdf";
+    private static final String FILENAME = "chandi_path.pdf"; // Filename of PDF
 
-    /**
-     * File descriptor of the PDF.
-     */
-    private ParcelFileDescriptor mFileDescriptor;
+    private ParcelFileDescriptor mFileDescriptor; // File descriptor of the PDF
 
-    /**
-     * {@link android.graphics.pdf.PdfRenderer} to render the PDF.
-     */
-    private PdfRenderer mPdfRenderer;
+    private PdfRenderer mPdfRenderer; // PDF renderer object to render pdf
 
-    /**
-     * Page that is currently shown on the screen.
-     */
-    private PdfRenderer.Page mCurrentPage;
+    private PdfRenderer.Page mCurrentPage; // Page that is currently being showed
 
-    /**
-     * {@link android.widget.ImageView} that shows a PDF page as a {@link android.graphics.Bitmap}
-     */
-    private ImageView mImageView;
+    private ImageView mImageView; // Image view container for pdf
 
-    /**
-     * {@link android.widget.Button} to move to the previous page.
-     */
-    private Button mButtonPrevious;
+    private Button mButtonPrevious; // Button to move to previous page
 
-    /**
-     * {@link android.widget.Button} to move to the next page.
-     */
-    private Button mButtonNext;
+    private Button mButtonNext; // Button to go to next page
 
-    private Button mSavePage;
+    private int mPageIndex; // Variable holds page's index
 
-    /**
-     * PDF page index
-     */
-    private int mPageIndex;
 
     private ArrayList<Integer> bookmarkList = new ArrayList<>();
 
@@ -107,33 +59,29 @@ public class PdfRendererBasicFragment extends Fragment implements View.OnClickLi
     }
 
     @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
+    }
+
+    @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         // Retain view references.
         mImageView = (ImageView) view.findViewById(R.id.image);
         mButtonPrevious = (Button) view.findViewById(R.id.previous);
         mButtonNext = (Button) view.findViewById(R.id.next);
-        mSavePage = (Button) view.findViewById(R.id.savePage);
+
+
         // Bind events.
         mButtonPrevious.setOnClickListener(this);
         mButtonNext.setOnClickListener(this);
-        mSavePage.setOnClickListener(this);
 
         mPageIndex = 0;
         // If there is a savedInstanceState (screen orientations, etc.), we restore the page index.
         if (null != savedInstanceState) {
             mPageIndex = savedInstanceState.getInt(STATE_CURRENT_PAGE_INDEX, 0);
         }
-
-        Button bookmarkButton = (Button) getActivity().findViewById(R.id.hamburger);
-
-        registerForContextMenu(bookmarkButton);
-        bookmarkButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                getActivity().openContextMenu(v);
-            }
-        });
     }
 
     @Override
@@ -149,16 +97,6 @@ public class PdfRendererBasicFragment extends Fragment implements View.OnClickLi
     }
 
     @Override
-    public void onStop() {
-        try {
-            closeRenderer();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        super.onStop();
-    }
-
-    @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         if (null != mCurrentPage) {
@@ -166,13 +104,15 @@ public class PdfRendererBasicFragment extends Fragment implements View.OnClickLi
         }
     }
 
-    /**
-     * Sets up a {@link android.graphics.pdf.PdfRenderer} and related resources.
-     */
+    // Open and render the pdf file
     private void openRenderer(Context context) throws IOException {
-        // In this sample, we read a PDF from the assets directory.
+
+        // Open pdf file
         File file = new File(context.getCacheDir(), FILENAME);
+
+        // Check if file exists first
         if (!file.exists()) {
+
             // Since PdfRenderer cannot handle the compressed asset file directly, we copy it into
             // the cache directory.
             InputStream asset = context.getAssets().open(FILENAME);
@@ -192,69 +132,35 @@ public class PdfRendererBasicFragment extends Fragment implements View.OnClickLi
         }
     }
 
-    /**
-     * Closes the {@link android.graphics.pdf.PdfRenderer} and related resources.
-     *
-     * @throws java.io.IOException When the PDF file cannot be closed.
-     */
-    private void closeRenderer() throws IOException {
-        if (null != mCurrentPage) {
-            mCurrentPage.close();
-        }
-        mPdfRenderer.close();
-        mFileDescriptor.close();
-    }
-
-    /**
-     * Shows the specified page of PDF to the screen.
-     *
-     * @param index The page index.
-     */
+    // Renders the passed in page
     private void showPage(int index) {
         if (mPdfRenderer.getPageCount() <= index) {
             return;
         }
-        // Make sure to close the current page before opening another one.
+        // Close page before opening another
         if (null != mCurrentPage) {
             mCurrentPage.close();
         }
-        // Use `openPage` to open a specific page in PDF.
+        // Open the currently selected page
         mCurrentPage = mPdfRenderer.openPage(index);
-        // Important: the destination bitmap must be ARGB (not RGB).
         Bitmap bitmap = Bitmap.createBitmap(mCurrentPage.getWidth(), mCurrentPage.getHeight(),
                 Bitmap.Config.ARGB_8888);
-        // Here, we render the page onto the Bitmap.
-        // To render a portion of the page, use the second and third parameter. Pass nulls to get
-        // the default result.
-        // Pass either RENDER_MODE_FOR_DISPLAY or RENDER_MODE_FOR_PRINT for the last parameter.
+
+        // Render page as bitmap and display
         mCurrentPage.render(bitmap, null, null, PdfRenderer.Page.RENDER_MODE_FOR_DISPLAY);
-        // We are ready to show the Bitmap to user.
+
+        // Set bitmap as image view
         mImageView.setImageBitmap(bitmap);
         updateUi();
     }
 
-    /**
-     * Updates the state of 2 control buttons in response to the current page index.
-     */
+    // Update if ui can be clicked or not
     private void updateUi() {
         int index = mCurrentPage.getIndex();
         int pageCount = mPdfRenderer.getPageCount();
         mButtonPrevious.setEnabled(0 != index);
         mButtonNext.setEnabled(index + 1 < pageCount);
         getActivity().setTitle(getString(R.string.app_name_with_index, index + 1, pageCount));
-    }
-
-    /**
-     * Gets the number of pages in the PDF. This method is marked as public for testing.
-     *
-     * @return The number of pages.
-     */
-    public int getPageCount() {
-        return mPdfRenderer.getPageCount();
-    }
-
-    public int getCurrentPage() {
-        return mCurrentPage.getIndex();
     }
 
     @Override
@@ -270,26 +176,17 @@ public class PdfRendererBasicFragment extends Fragment implements View.OnClickLi
                 showPage(mCurrentPage.getIndex() + 1);
                 break;
             }
-            case R.id.savePage: {
-                if (!bookmarkList.contains(mCurrentPage.getIndex())) {
-                    bookmarkList.add(mCurrentPage.getIndex());
-                }
-                break;
-            }
         }
     }
 
+    // If context item selected go to page
     @Override
     public boolean onContextItemSelected(MenuItem item) {
-
-        AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
-
         showPage(item.getItemId());
-
-
         return true;
     }
 
+    // Create a context menu based on array list of selected bookmarks
     @Override
     public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
         super.onCreateContextMenu(menu, v, menuInfo);
@@ -300,5 +197,40 @@ public class PdfRendererBasicFragment extends Fragment implements View.OnClickLi
         getActivity().getMenuInflater().inflate(R.menu.bookmarks , menu);
     }
 
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        for (int i = 0; i < bookmarkList.size(); i++) {
+            String line = "Page " + (bookmarkList.get(i)+1);
+            menu.add(0,bookmarkList.get(i),bookmarkList.get(i), line);
+        }
+
+        inflater.inflate(R.menu.bookmarks, menu);
+
+        super.onCreateOptionsMenu(menu,inflater);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        int id = item.getItemId();
+        switch (id) {
+
+            // Open up add activity
+            case R.id.bookmarkButton:
+                if (!bookmarkList.contains(mCurrentPage.getIndex())) {
+                    bookmarkList.add(mCurrentPage.getIndex());
+                    getActivity().invalidateOptionsMenu();
+                }
+                else {
+                    bookmarkList.remove(bookmarkList.indexOf(mCurrentPage.getIndex()));
+                    getActivity().invalidateOptionsMenu();
+                }
+                return true;
+            default:
+                showPage(item.getItemId());
+                return true;
+        }
+    }
 
 }
+

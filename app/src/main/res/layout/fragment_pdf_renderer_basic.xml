@@ -38,29 +38,6 @@
         android:orientation="horizontal">
 
         <Button
-            android:id="@+id/hamburger"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Bookmarks"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_marginLeft="17dp"
-            android:layout_marginStart="17dp"
-            android:layout_marginTop="11dp" />
-
-        <Button
-            android:id="@+id/savePage"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Save Page"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentRight="true"
-            android:layout_marginRight="17dp"
-            android:layout_marginTop="11dp" />
-
-
-        <Button
             android:id="@+id/previous"
             style="?android:attr/buttonBarButtonStyle"
             android:layout_width="0dp"

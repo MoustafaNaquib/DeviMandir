@@ -3,6 +3,8 @@ package edu.wwu.devimandir.devimandir;
 import android.content.Intent;
 import android.support.v4.widget.DrawerLayout;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.ContextMenu;
 import android.view.Gravity;
 import android.view.Menu;
@@ -17,9 +19,9 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
-import static edu.wwu.devimandir.devimandir.R.id.hamburger;
 
-public class BookActivity extends MainActivity {
+
+public class BookActivity extends AppCompatActivity {
 
     public static final String FRAGMENT_PDF_RENDERER_BASIC = "pdf_renderer_basic";
     private String[] sideMenuPages; // Array of strings containing names of side menu pages
@@ -41,13 +43,17 @@ public class BookActivity extends MainActivity {
                     .commit();
         }
 
+        // Set toolbar functionality
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
         // Get array of side menu pages from array.xml
         sideMenuPages = getResources().getStringArray(R.array.side_menu_array);
 
         // Get view by id for needed elements
         mDrawerList = (ListView) findViewById(R.id.navList);
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-        bookmarkButton = (Button) findViewById(R.id.hamburger);
+
 
 
         // Create array adapter to insert array of page names into side menu
@@ -76,15 +82,6 @@ public class BookActivity extends MainActivity {
             }
         });
 
-
-
-//        registerForContextMenu(bookmarkButton);
-//        bookmarkButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                openContextMenu(v);
-//            }
-//        });
     }
 
 
@@ -99,5 +96,6 @@ public class BookActivity extends MainActivity {
         startActivity(newIntent);
         finish();
     }
+
 
 }
