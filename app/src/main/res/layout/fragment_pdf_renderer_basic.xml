@@ -45,6 +45,14 @@
             android:layout_weight="1"
             android:text="@string/previous" />
 
+        <EditText
+            android:id="@+id/searchPage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:inputType="number"
+            />
+
         <Button
             android:id="@+id/next"
             style="?android:attr/buttonBarButtonStyle"

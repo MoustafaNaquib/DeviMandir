@@ -6,7 +6,11 @@
         android:id="@+id/bookmarkButton"
         android:orderInCategory="0"
         android:title="add"
-        android:icon="@android:drawable/ic_menu_save"
+        android:icon="@drawable/ic_bookmark_empty"
         app:showAsAction="ifRoom" />
-
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/myEditText"
+        android:background="#000000" />
 </menu>

@@ -32,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
         viewPage.setAdapter(viewPagerAdapter);
 
 
+
         TabHost tab = (TabHost) findViewById(android.R.id.tabhost);
         tab.setup();
 

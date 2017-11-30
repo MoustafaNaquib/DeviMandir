@@ -15,16 +15,19 @@
         android:theme="@style/AppTheme">
         <activity android:name=".MainActivity">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+                <action android:name="android.intent.action.MAIN"
+                    android:launchMode="singleTask"/>
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
             android:name=".BookActivity"
+            android:launchMode="singleTask"
             android:parentActivityName=".MainActivity" />
         <activity
             android:name=".MusicActivity"
+            android:launchMode="singleTask"
             android:parentActivityName=".MainActivity" />
         <activity android:name=".Tab1" />
         <activity android:name=".Tab2" />
