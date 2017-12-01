@@ -16,22 +16,31 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
-            android:text="This will be Music Page!"
             android:textSize="24sp"
             android:gravity="center"
             android:layout_marginTop="100dp"/>
 
-        <!--<Button-->
-            <!--android:id="@+id/hamburger"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:text="Bookmark"-->
-            <!--android:layout_alignParentTop="true"-->
-            <!--android:layout_alignParentLeft="true"-->
-            <!--android:layout_alignParentStart="true"-->
-            <!--android:layout_marginLeft="17dp"-->
-            <!--android:layout_marginStart="17dp"-->
-            <!--android:layout_marginTop="11dp" />-->
+        <Button
+            android:id="@+id/page2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="page 2"
+            android:tag="2"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="17dp"
+            android:layout_marginTop="11dp" />
+
+        <Button
+            android:id="@+id/page1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="page 1"
+            android:tag="1"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="17dp"
+            android:layout_marginTop="11dp" />
 
         <FrameLayout
             android:id="@+id/container"

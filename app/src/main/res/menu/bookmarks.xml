@@ -4,10 +4,17 @@
     tools:context="a2.csci412.wwu.edu.MainActivity">
     <item
         android:id="@+id/bookmarkButton"
-        android:orderInCategory="0"
-        android:title="add"
+        android:orderInCategory="1"
+        android:title="bookmark"
         android:icon="@drawable/ic_bookmark_empty"
         app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/tableContentsButton"
+        android:orderInCategory="0"
+        android:title="table of contents"
+        android:icon="@drawable/ic_table_of_contents"
+        app:showAsAction="ifRoom" />
+
     <EditText
         android:layout_width="match_parent"
         android:layout_height="match_parent"

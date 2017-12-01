@@ -10,6 +10,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.Toast;
 
 public class MusicActivity extends AppCompatActivity {
 
@@ -17,7 +18,7 @@ public class MusicActivity extends AppCompatActivity {
     private DrawerLayout mDrawerLayout;
     private ListView mDrawerList;
     private ArrayAdapter<String> mAdapter;
-    private Button hamburger;
+    private Button page1, page2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,18 +31,45 @@ public class MusicActivity extends AppCompatActivity {
             // Get view by id for needed elements
             mDrawerList = (ListView) findViewById(R.id.navList);
             mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-//            hamburger = (Button) findViewById(R.id.hamburger);
+
+
+            page1 = (Button) findViewById(R.id.page1);
+            page2 = (Button) findViewById(R.id.page2);
 
 
             // Create array adapter to insert array of page names into side menu
             mAdapter = new ArrayAdapter<String>(this, R.layout.list_item_style, sideMenuPages);
             mDrawerList.setAdapter(mAdapter);
-//            hamburger.setOnClickListener(new View.OnClickListener() {
+
+
+            View.OnClickListener x = new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    //String toc_tag = (String) v.getTag();
+                    int toc_index = Integer.parseInt((String) v.getTag());
+                    //Toast.makeText(MusicActivity.this, "" + y, Toast.LENGTH_SHORT).show();
+                    // open new pdf activity and send page information
+                    Intent intent = new Intent(getBaseContext(), BookActivity.class);
+                    intent.putExtra("toc_page", toc_index);
+                    startActivity(intent);
+                }
+            };
+
+             // Bind events.
+            page1.setOnClickListener(x);
+            page2.setOnClickListener(x);
+
+//            page1.setOnClickListener(new View.OnClickListener() {
 //                @Override
 //                public void onClick(View v) {
-//                    openDrawer();
+//                    // open new pdf activity and send page information
+//                    Intent intent = new Intent(getBaseContext(), BookActivity.class);
+//                    intent.putExtra("toc_page", 1);
+//                    startActivity(intent);
 //                }
 //            });
+
+
 
             mDrawerList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override

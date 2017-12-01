@@ -56,12 +56,11 @@
                             android:layout_height="match_parent"
                             android:layout_width="match_parent"
                             android:orientation="vertical">
-                            <TextView
-                                android:id="@+id/textView1"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="This is Tab 1!" />
-
+                            <WebView
+                                android:layout_width="fill_parent"
+                                android:layout_height="fill_parent"
+                                android:id="@+id/Facebook">
+                            </WebView>
                         </LinearLayout>
 
                         <LinearLayout
@@ -69,11 +68,11 @@
                             android:layout_width="match_parent"
                             android:id="@+id/tab2"
                             android:orientation="vertical">
-                            <TextView
-                                android:id="@+id/textView2"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="This is Tab 2!" />
+                            <WebView
+                                android:layout_width="fill_parent"
+                                android:layout_height="fill_parent"
+                                android:id="@+id/Shreema">
+                            </WebView>
                         </LinearLayout>
 
                         <LinearLayout
@@ -81,11 +80,11 @@
                             android:layout_width="match_parent"
                             android:id="@+id/tab3"
                             android:orientation="vertical">
-                            <TextView
-                                android:id="@+id/textView3"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="This is Tab 3!" />
+                            <WebView
+                                android:layout_width="fill_parent"
+                                android:layout_height="fill_parent"
+                                android:id="@+id/Twitter">
+                            </WebView>
                         </LinearLayout>
                     </FrameLayout>
                 </LinearLayout>
@@ -94,7 +93,6 @@
 </RelativeLayout>
 
     <!-- Side navigation drawer UI -->
-
 
     <ListView
         android:layout_height="match_parent"

@@ -1,6 +1,7 @@
 package edu.wwu.devimandir.devimandir;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.pdf.PdfRenderer;
@@ -54,6 +55,7 @@ public class PdfRendererBasicFragment extends Fragment implements View.OnClickLi
     private float x1,x2; // Hold location of pressdown and pressup events
     static final int MIN_DISTANCE = 150; // Distance to trigger on swipe event
     static private ArrayList<Integer> bookmarkList = new ArrayList<>(); // Arraylist of bookmarks
+    private int tableOfContentsPage;
 
     public PdfRendererBasicFragment() {
     }
@@ -65,6 +67,8 @@ public class PdfRendererBasicFragment extends Fragment implements View.OnClickLi
 
         View view = inflater.inflate(R.layout.fragment_pdf_renderer_basic, container, false);
         mSearchText = (EditText) view.findViewById(R.id.searchPage);
+
+
 
         // Set on touch listenere that detects left and right swipes
         view.setOnTouchListener(new View.OnTouchListener() {
@@ -166,6 +170,11 @@ public class PdfRendererBasicFragment extends Fragment implements View.OnClickLi
         if (null != savedInstanceState) {
             mPageIndex = savedInstanceState.getInt(STATE_CURRENT_PAGE_INDEX, 0);
         }
+
+        int tableOfContentsPage = getArguments().getInt("toc_page");
+        if (tableOfContentsPage != -1) {
+            mPageIndex = tableOfContentsPage;
+        }
     }
 
     // On start show last opened page
@@ -176,6 +185,12 @@ public class PdfRendererBasicFragment extends Fragment implements View.OnClickLi
             openRenderer(getActivity());
             getBookmarks();
             showPage(mPageIndex);
+            tableOfContentsPage = getArguments().getInt("toc_page");
+            if (tableOfContentsPage != -1) {
+                showPage(tableOfContentsPage-1);
+            }
+            //Toast.makeText(getContext(), ""+tableOfContentsPage, Toast.LENGTH_SHORT).show();
+
         } catch (IOException e) {
             e.printStackTrace();
             Toast.makeText(getActivity(), "Error! " + e.getMessage(), Toast.LENGTH_SHORT).show();
@@ -297,7 +312,6 @@ public class PdfRendererBasicFragment extends Fragment implements View.OnClickLi
             menu.add(0,bookmarkList.get(i),bookmarkList.get(i), line);
         }
         getActivity().getMenuInflater().inflate(R.menu.bookmarks , menu);
-
     }
 
     // Save bookmark in set inside shared preferences as well as page.
@@ -319,7 +333,10 @@ public class PdfRendererBasicFragment extends Fragment implements View.OnClickLi
 
         if (set != null) {
             for (String x : set) {
-                bookmarkList.add(Integer.parseInt(x));
+                int page = Integer.parseInt(x);
+                if (!bookmarkList.contains(page)) {
+                    bookmarkList.add(Integer.parseInt(x));
+                }
             }
         }
         mPageIndex = sp.getInt("page", 1);
@@ -373,6 +390,14 @@ public class PdfRendererBasicFragment extends Fragment implements View.OnClickLi
                     getActivity().invalidateOptionsMenu();
                 }
                 return true;
+
+            // Open table of contents
+            case R.id.tableContentsButton:
+                Intent intent = new Intent(getActivity(), MusicActivity.class);
+                getActivity().finish();
+                startActivity(intent);
+                return true;
+
             // Show page selected
             default:
                 showPage(item.getItemId());

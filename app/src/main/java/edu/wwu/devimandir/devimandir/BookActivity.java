@@ -21,17 +21,28 @@ public class BookActivity extends AppCompatActivity {
     private String[] sideMenuPages; // Array of strings containing names of side menu pages
     private ListView mDrawerList;
     private ArrayAdapter<String> mAdapter;
-
+    private int tableOfContentPage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_book);
 
+
+
         if (savedInstanceState == null) {
+            Intent mIntent = getIntent();
+            int tableOfContentPage = mIntent.getIntExtra("toc_page", -1);
+
+            Bundle bundle = new Bundle();
+            bundle.putInt("toc_page", tableOfContentPage);
+
+            PdfRendererBasicFragment frag = new PdfRendererBasicFragment();
+            frag.setArguments(bundle);
+
+
             getSupportFragmentManager().beginTransaction()
-                    .add(R.id.container, new PdfRendererBasicFragment(),
-                            FRAGMENT_PDF_RENDERER_BASIC)
+                    .add(R.id.container, frag)
                     .commit();
         }
 
