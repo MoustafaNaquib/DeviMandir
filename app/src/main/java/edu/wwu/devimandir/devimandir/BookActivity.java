@@ -75,7 +75,7 @@ public class BookActivity extends AppCompatActivity {
                         startActivity(intent);
                         break;
                     case 2:
-                        intent = new Intent(BookActivity.this, MusicActivity.class);
+                        intent = new Intent(BookActivity.this, TableOfContentsActivity.class);
                         startActivity(intent);
                         break;
                 }

@@ -3,7 +3,7 @@
     <string-array name="side_menu_array">
         <item>Home</item>
         <item>Book</item>
-        <item>Music</item>
+        <item>Table of Contents</item>
         <item>Videos</item>
         <item>Panchang</item>
         <item>LIVE Broadcasts</item>
@@ -14,4 +14,50 @@
         <item>About Us</item>
         <item>Help</item>
     </string-array>
+
+    <string-array name="table_of_contents">
+        <item>Title Page</item>
+        <item>Introduction</item>
+        <item>Table of Contents</item>
+        <item>Devata Pranam (Bowing Down to the Gods and Goddesses)</item>
+        <item>Prathamo Dhyayah (Chapter One~ Balance of Too Much and Too Little)</item>
+        <item>Dvitiyo Dhyayh (Chapter Two~ Slaying of the Armies of the Great Ego)</item>
+        <item>Tritiyo Dhyayah (Chapter Three~ Slaying of the Great Ego)</item>
+        <item>Chaturtho Dhyayah (Chapter Four~ Gods Praise the Goddess)</item>
+        <item>Panchamo Dhyayah (Chapter Five~ Ambassador of Self-Conceit)</item>
+        <item>Shastho Dhyayah (Chapter Six~ Slaying of Sinful Eyes)</item>
+        <item>Saptamo Dhyayah (Chapter Seven~ Slaying of Passion and Anger)</item>
+        <item>Ashtamo Dhyayah (Chapter Eight~ Slaying of the Seed of Desire)</item>
+        <item>Navamo Dhyayah (Chapter Nine~ Slaying of Self-Deprecation)</item>
+        <item>Dashamo Dhyayah (Chapter Ten~ Slaying of Self-Conceit)</item>
+        <item>Ekadasho Dhyayah (Chapter Eleven~ Gods Song of Praise)</item>
+        <item>Dwadasho Dhyayah (Chapter Twelve~ Fruits of Reciting the Chandi)</item>
+        <item>Trayodasho Dhyayah (Chapter Thirteen~ Granting of Boons)</item>
+        <item>Siddha Kunjika Stotram (Song that Gives the Key to Perfection)</item>
+        <item>Pranam (Bowing Down with Devotion)</item>
+    </string-array>
+
+    <string-array name="page_numbers">
+        <item>1</item>
+        <item>3</item>
+        <item>9</item>
+        <item>14</item>
+        <item>119</item>
+        <item>144</item>
+        <item>163</item>
+        <item>175</item>
+        <item>192</item>
+        <item>215</item>
+        <item>222</item>
+        <item>230</item>
+        <item>247</item>
+        <item>259</item>
+        <item>268</item>
+        <item>285</item>
+        <item>296</item>
+        <item>370</item>
+        <item>387</item>
+    </string-array>
+
+
 </resources>

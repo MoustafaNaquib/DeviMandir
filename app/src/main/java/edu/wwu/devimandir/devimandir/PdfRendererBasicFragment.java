@@ -120,7 +120,7 @@ public class PdfRendererBasicFragment extends Fragment implements View.OnClickLi
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        // Retain view references.
+        // Retain view referfasdfsdfasdfences.
         mImageView = (ImageView) view.findViewById(R.id.image);
         mButtonPrevious = (Button) view.findViewById(R.id.previous);
         mButtonNext = (Button) view.findViewById(R.id.next);
@@ -184,11 +184,16 @@ public class PdfRendererBasicFragment extends Fragment implements View.OnClickLi
         try {
             openRenderer(getActivity());
             getBookmarks();
+            mSearchText.setTag("program_changed");
             showPage(mPageIndex);
             tableOfContentsPage = getArguments().getInt("toc_page");
             if (tableOfContentsPage != -1) {
                 showPage(tableOfContentsPage-1);
+                mSearchText.setText(""+ (mCurrentPage.getIndex()+1));
+
+
             }
+            mSearchText.setTag("user_changed");
             //Toast.makeText(getContext(), ""+tableOfContentsPage, Toast.LENGTH_SHORT).show();
 
         } catch (IOException e) {
@@ -299,7 +304,10 @@ public class PdfRendererBasicFragment extends Fragment implements View.OnClickLi
     // If context item selected go to page
     @Override
     public boolean onContextItemSelected(MenuItem item) {
+        mSearchText.setTag("program_changed");
         showPage(item.getItemId());
+        mSearchText.setTag("user_changed");
+
         return true;
     }
 
@@ -393,14 +401,16 @@ public class PdfRendererBasicFragment extends Fragment implements View.OnClickLi
 
             // Open table of contents
             case R.id.tableContentsButton:
-                Intent intent = new Intent(getActivity(), MusicActivity.class);
+                Intent intent = new Intent(getActivity(), TableOfContentsActivity.class);
                 getActivity().finish();
                 startActivity(intent);
                 return true;
 
             // Show page selected
             default:
+                mSearchText.setTag("program_changed");
                 showPage(item.getItemId());
+                mSearchText.setTag("user_changed");
                 return true;
         }
     }

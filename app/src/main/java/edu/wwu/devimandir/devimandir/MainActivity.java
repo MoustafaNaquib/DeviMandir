@@ -78,7 +78,7 @@ public class MainActivity extends AppCompatActivity {
                         startActivity(intent);
                         break;
                     case 2:
-                        intent = new Intent(MainActivity.this, MusicActivity.class);
+                        intent = new Intent(MainActivity.this, TableOfContentsActivity.class);
                         startActivity(intent);
                         break;
                 }
@@ -92,10 +92,10 @@ public class MainActivity extends AppCompatActivity {
         shreemaPage.loadUrl("http://www.shreemaa.org/whats-new-3/");
 
         WebView facebookPage = (WebView) findViewById(R.id.Facebook);
-        facebookPage.loadUrl("https://www.facebook.com/summiteverett/");
+        facebookPage.loadUrl("https://www.facebook.com/devi.mandir/");
 
         WebView twitterPage = (WebView) findViewById(R.id.Twitter);
-        twitterPage.loadUrl("https://www.facebook.com/summiteverett/");
+        twitterPage.loadUrl("https://twitter.com/devimandir?lang=en\n");
 
 
         facebookPage.setWebViewClient(new WebViewClient() {

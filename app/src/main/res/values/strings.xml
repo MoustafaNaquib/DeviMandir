@@ -5,4 +5,23 @@
     <string name="previous">Prev</string>
     <string name="next">Next</string>
     <string name="title_activity_main2">Main2Activity</string>
+    <!--<string name="TableofContents">Table of Contents</string>-->
+    <!--<string name="TitlePage">Title Page</string>-->
+    <!--<string name="Introduction">Introduction</string>-->
+    <!--<string name="DevataPranam">Devata Pranam (Bowing Down to the Gods and Goddesses)</string>-->
+    <!--<string name="ChapterOne">Prathamo Dhyayah (Chapter One~ Balance of Too Much and Too Little)</string>-->
+    <!--<string name="ChapterTwo">Dvitiyo Dhyayh (Chapter Two~ Slaying of the Armies of the Great Ego)</string>-->
+    <!--<string name="ChapterThree">Tritiyo Dhyayah (Chapter Three~ Slaying of the Great Ego)</string>-->
+    <!--<string name="ChapterFour">Chaturtho Dhyayah (Chapter Four~ Gods Praise the Goddess)</string>-->
+    <!--<string name="ChapterFive">Panchamo Dhyayah (Chapter Five~ Ambassador of Self-Conceit)</string>-->
+    <!--<string name="ChapterSix">Shastho Dhyayah (Chapter Six~ Slaying of Sinful Eyes)</string>-->
+    <!--<string name="ChapterSeven">Saptamo Dhyayah (Chapter Seven~ Slaying of Passion and Anger)</string>-->
+    <!--<string name="ChapterEight">Ashtamo Dhyayah (Chapter Eight~ Slaying of the Seed of Desire)</string>-->
+    <!--<string name="ChapterNine">Navamo Dhyayah (Chapter Nine~ Slaying of Self-Deprecation)</string>-->
+    <!--<string name="ChapterTen">Dashamo Dhyayah (Chapter Ten~ Slaying of Self-Conceit)</string>-->
+    <!--<string name="ChapterEleven">Ekadasho Dhyayah (Chapter Eleven~ Gods Song of Praise)</string>-->
+    <!--<string name="ChapterTwelve">Dwadasho Dhyayah (Chapter Twelve~ Fruits of Reciting the Chandi)</string>-->
+    <!--<string name="ChapterThirteen">Trayodasho Dhyayah (Chapter Thirteen~ Granting of Boons)</string>-->
+    <!--<string name="SiddhaKunjikaStotram">Siddha Kunjika Stotram (Song that Gives the Key to Perfection)</string>-->
+    <!--<string name="Pranam">Pranam (Bowing Down with Devotion)</string>-->
 </resources>
